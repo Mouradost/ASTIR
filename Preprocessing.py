@@ -68,10 +68,7 @@ class STMatrix(object):
         depends = [range(1, len_closeness+1),
                    [PeriodInterval * self.T * j for j in range(1, len_period+1)],
                    [TrendInterval * self.T * j for j in range(1, len_trend+1)]]
-        print('*'*100)
-        print(depends)
         i = max(self.T * TrendInterval * len_trend, self.T * PeriodInterval * len_period, len_closeness)
-        print('i: ', i)
 
         while i < len(self.pd_timestamps):
             Flag = True
@@ -89,7 +86,6 @@ class STMatrix(object):
             y = self.get_matrix(self.pd_timestamps[i])
             if len_closeness > 0:
                 XC.append(np.vstack(x_c))
-                print('XC shape [[[[ ', np.shape(XC))
             if len_period > 0:
                 XP.append(np.vstack(x_p))
             if len_trend > 0:
@@ -707,13 +703,27 @@ def load_data(T=48, nb_flow=2, len_closeness=None, len_period=None, len_trend=No
 
 def save_preprocess_data(filePath, X_train, Y_train, X_test, Y_test, mmn, metadata_dim, timestamp_train, timestamp_test, DB_name='TaxiBJ'):
     os.makedirs(filePath, exist_ok=True)
-    np.save(os.path.join(filePath, 'XC'), X_train[0])
-    np.save(os.path.join(filePath, 'XP'), X_train[1])
-    np.save(os.path.join(filePath, 'XT'), X_train[2])
+	if len_closeness > 0 and len_period > 0 and len_trend > 0:
+        id_closeness, id_period, id_trend, id_external = 0, 1, 2, 2
+    if len_closeness == 0 and len_period > 0 and len_trend > 0:
+        id_closeness, id_period, id_trend, id_external = 0, 0, 1, 2
+    if len_closeness > 0 and len_period == 0 and len_trend > 0:
+        id_closeness, id_period, id_trend, id_external = 0, 1, 1, 2
+    if len_closeness > 0 and len_period > 0 and len_trend == 0:
+        id_closeness, id_period, id_trend, id_external = 0, 1, 2, 2
+	if len_closeness > 0:
+		np.save(os.path.join(filePath, 'XC'), X_train[id_closeness])
+	if len_period > 0:
+		np.save(os.path.join(filePath, 'XP'), X_train[id_period])
+	if len_trend > 0:
+		np.save(os.path.join(filePath, 'XT'), X_train[id_trend])
     np.save(os.path.join(filePath, 'Y_train'), Y_train)
-    np.save(os.path.join(filePath, 'XC_Test'), X_test[0])
-    np.save(os.path.join(filePath, 'XP_Test'), X_test[1])
-    np.save(os.path.join(filePath, 'XT_Test'), X_test[2])
+	if len_closeness > 0:
+		np.save(os.path.join(filePath, 'XC_Test'), X_test[id_closeness])
+	if len_period > 0:
+		np.save(os.path.join(filePath, 'XP_Test'), X_test[id_period])
+	if len_trend > 0:
+		np.save(os.path.join(filePath, 'XT_Test'), X_test[id_trend])
     np.save(os.path.join(filePath, 'Y_test'), Y_test)
     with open(os.path.join(filePath, 'mmn'), 'wb') as fpkl:
         for obj in [mmn]:
@@ -722,8 +732,8 @@ def save_preprocess_data(filePath, X_train, Y_train, X_test, Y_test, mmn, metada
     np.save(os.path.join(filePath, 'timestamp_train'), timestamp_train)
     np.save(os.path.join(filePath, 'timestamp_test'), timestamp_test)
     if DB_name == 'TaxiBJ':
-        np.save(os.path.join(filePath, 'External'), X_train[3])
-        np.save(os.path.join(filePath, 'External_Test'), X_test[3])
+        np.save(os.path.join(filePath, 'External'), X_train[id_external])
+        np.save(os.path.join(filePath, 'External_Test'), X_test[id_external])
 
 def load_preprocess_data(filePath, DB_name='TaxiBJ'):
     X_train, X_test = [], []
@@ -746,7 +756,7 @@ def load_preprocess_data(filePath, DB_name='TaxiBJ'):
 
     return X_train, Y_train, X_test, Y_test, mmn, metadata_dim, timestamp_train, timestamp_test
 
-def prepare_data_as_a_sequence(X_train, X_test, len_closeness=3, len_period=3, len_trend=3, channel=2):
+def prepare_data_as_a_sequence(X_Train, X_Test, len_closeness=3, len_period=3, len_trend=3, channel=2):
     X_Train, X_Test = X_train, X_test
     if len_closeness > 0 and len_period > 0 and len_trend > 0:
         id_closeness, id_period, id_trend = 0, 1, 2
@@ -777,7 +787,8 @@ def prepare_data_as_a_sequence(X_train, X_test, len_closeness=3, len_period=3, l
     return X_Train, X_Test
 
 def get_DB(DB_name, len_closeness, len_period, len_trend):
-    preprocessed_DB_path = os.path.join(os.getcwd(), 'DB/databases_Cleaned/paper_preprocess/{}'.format(DB_name),
+	assert(len_closeness + len_period + len_trend > 1)
+    preprocessed_DB_path = os.path.join(os.getcwd(), 'DB/databases_preprocessed/{}'.format(DB_name),
                                         'len_closeness_{}_len_period_{}_len_trend_{}'.format(len_closeness, len_period,
                                                                                              len_trend))
     if os.path.isdir(preprocessed_DB_path):
@@ -793,7 +804,7 @@ def get_DB(DB_name, len_closeness, len_period, len_trend):
         else:
             X_train, Y_train, X_test, Y_test, mmn, metadata_dim, timestamp_train, timestamp_test = load_data_NYC(
                 T=24, nb_flow=2, len_closeness=len_closeness, len_period=len_period, len_trend=len_trend, len_test=240)
-        #save_preprocess_data(filePath=preprocessed_DB_path, X_train=X_train, Y_train=Y_train, X_test=X_test, Y_test=Y_test, mmn=mmn, metadata_dim=metadata_dim, timestamp_train=timestamp_train, timestamp_test=timestamp_test, DB_name=DB_name)
+        save_preprocess_data(filePath=preprocessed_DB_path, X_train=X_train, Y_train=Y_train, X_test=X_test, Y_test=Y_test, mmn=mmn, metadata_dim=metadata_dim, timestamp_train=timestamp_train, timestamp_test=timestamp_test, DB_name=DB_name)
 
     return X_train, Y_train, X_test, Y_test, mmn, metadata_dim, timestamp_train, timestamp_test
 
