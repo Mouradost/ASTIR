@@ -703,7 +703,7 @@ def load_data(T=48, nb_flow=2, len_closeness=None, len_period=None, len_trend=No
 
 def save_preprocess_data(filePath, X_train, Y_train, X_test, Y_test, mmn, metadata_dim, timestamp_train, timestamp_test, DB_name='TaxiBJ'):
     os.makedirs(filePath, exist_ok=True)
-	if len_closeness > 0 and len_period > 0 and len_trend > 0:
+    if len_closeness > 0 and len_period > 0 and len_trend > 0:
         id_closeness, id_period, id_trend, id_external = 0, 1, 2, 2
     if len_closeness == 0 and len_period > 0 and len_trend > 0:
         id_closeness, id_period, id_trend, id_external = 0, 0, 1, 2
@@ -711,19 +711,19 @@ def save_preprocess_data(filePath, X_train, Y_train, X_test, Y_test, mmn, metada
         id_closeness, id_period, id_trend, id_external = 0, 1, 1, 2
     if len_closeness > 0 and len_period > 0 and len_trend == 0:
         id_closeness, id_period, id_trend, id_external = 0, 1, 2, 2
-	if len_closeness > 0:
-		np.save(os.path.join(filePath, 'XC'), X_train[id_closeness])
-	if len_period > 0:
-		np.save(os.path.join(filePath, 'XP'), X_train[id_period])
-	if len_trend > 0:
-		np.save(os.path.join(filePath, 'XT'), X_train[id_trend])
+    if len_closeness > 0:
+        np.save(os.path.join(filePath, 'XC'), X_train[id_closeness])
+    if len_period > 0:
+        np.save(os.path.join(filePath, 'XP'), X_train[id_period])
+    if len_trend > 0:
+        np.save(os.path.join(filePath, 'XT'), X_train[id_trend])
     np.save(os.path.join(filePath, 'Y_train'), Y_train)
-	if len_closeness > 0:
-		np.save(os.path.join(filePath, 'XC_Test'), X_test[id_closeness])
-	if len_period > 0:
-		np.save(os.path.join(filePath, 'XP_Test'), X_test[id_period])
-	if len_trend > 0:
-		np.save(os.path.join(filePath, 'XT_Test'), X_test[id_trend])
+    if len_closeness > 0:
+        np.save(os.path.join(filePath, 'XC_Test'), X_test[id_closeness])
+    if len_period > 0:
+        np.save(os.path.join(filePath, 'XP_Test'), X_test[id_period])
+    if len_trend > 0:
+        np.save(os.path.join(filePath, 'XT_Test'), X_test[id_trend])
     np.save(os.path.join(filePath, 'Y_test'), Y_test)
     with open(os.path.join(filePath, 'mmn'), 'wb') as fpkl:
         for obj in [mmn]:
@@ -737,13 +737,19 @@ def save_preprocess_data(filePath, X_train, Y_train, X_test, Y_test, mmn, metada
 
 def load_preprocess_data(filePath, DB_name='TaxiBJ'):
     X_train, X_test = [], []
-    X_train.append(np.load(os.path.join(filePath, 'XC.npy')))
-    X_train.append(np.load(os.path.join(filePath, 'XP.npy')))
-    X_train.append(np.load(os.path.join(filePath, 'XT.npy')))
+    if len_closeness > 0:
+        X_train.append(np.load(os.path.join(filePath, 'XC.npy')))
+    if len_period > 0:
+        X_train.append(np.load(os.path.join(filePath, 'XP.npy')))
+    if len_trend > 0:
+        X_train.append(np.load(os.path.join(filePath, 'XT.npy')))
     Y_train = np.load(os.path.join(filePath, 'Y_train.npy'))
-    X_test.append(np.load(os.path.join(filePath, 'XC_Test.npy')))
-    X_test.append(np.load(os.path.join(filePath, 'XP_Test.npy')))
-    X_test.append(np.load(os.path.join(filePath, 'XT_Test.npy')))
+    if len_closeness > 0:
+        X_test.append(np.load(os.path.join(filePath, 'XC_Test.npy')))
+    if len_period > 0:
+        X_test.append(np.load(os.path.join(filePath, 'XP_Test.npy')))
+    if len_trend > 0:
+        X_test.append(np.load(os.path.join(filePath, 'XT_Test.npy')))
     Y_test = np.load(os.path.join(filePath, 'Y_test.npy'))
     with open(os.path.join(filePath, 'mmn'), 'rb') as fpkl:
         mmn = pickle.load(fpkl)
@@ -787,7 +793,7 @@ def prepare_data_as_a_sequence(X_Train, X_Test, len_closeness=3, len_period=3, l
     return X_Train, X_Test
 
 def get_DB(DB_name, len_closeness, len_period, len_trend):
-	assert(len_closeness + len_period + len_trend > 1)
+    #assert(len_closeness + len_period + len_trend > 1)
     preprocessed_DB_path = os.path.join(os.getcwd(), 'DB/databases_preprocessed/{}'.format(DB_name),
                                         'len_closeness_{}_len_period_{}_len_trend_{}'.format(len_closeness, len_period,
                                                                                              len_trend))
