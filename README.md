@@ -5,5 +5,5 @@ This is the repository for the papaer published in [IEEE Access journal](https:/
 
 ```markdown
 
-![ASTIR Architecture](/ASTIR Architecture.png)
+![ASTIR Architecture](ASTIR/ASTIR architecture.png)
 ```
