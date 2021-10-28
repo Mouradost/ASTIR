@@ -1,9 +1,45 @@
-@ARTICLE{Mourad_Shen_2021_Spatio,
-  author={Mourad, Lablack and Qi, Heng and Shen, Yanming and Yin, Baocai},
-  journal={IEEE Access}, 
-  title={ASTIR: Spatio-Temporal Data Mining for Crowd Flow Prediction}, 
-  year={2019},
-  volume={7},
-  number={},
-  pages={175159-175165},
-  doi={10.1109/ACCESS.2019.2950956}}
+cff-version: 1.2.0
+message: If you use ASTIR in your work, please cite it using the following metadata
+title: "ASTIR: Spatio-Temporal Data Mining for Crowd Flow Prediction"
+abstract: The citywide crowd flow prediction is crucial for a city to ensure productivity, safety and management of its citizen. However, the crowd flow may be affected by many factors, such as weather, working times, events, seasons, and so on. In this paper, we proposed Attentive Spatio-Temporal Inception ResNet (ASTIR), which aims to address the difficulty of crowd flow prediction. The ASTIR is based on the Inception-ResNet structure combined with Convolution-LSTM layers and attention module to better capture pattern movement changes. We build our deep neural network framework consisting of four distinct parts, by which we can capture the short-term, long-term and period properties, as well as external factors that can affect crowd flow behaviors. To show the performance of the proposed method, we use the widely applied benchmarks for crowd flow prediction (Taxi Beijing and Bike New York), and obtain notable improvements over the state-of-the-art approaches.
+authors:
+  - family-names: Lablack
+    given-names: Mourad
+    orcid: https://orcid.org/0000-0001-5997-7199
+    affiliation: Dalian University Of Technology, Dalian, China
+  - name: "ASTIR: Spatio-Temporal Data Mining for Crowd Flow Prediction"
+keywords:
+  - Traffic flow Prediction
+  - ConvLSTM
+  - Spatio-Temporal Neural Network
+version: 0.9.0
+doi: 10.5281/zenodo.1184077
+date-released: 2021-08-18
+license: Apache-2.0
+repository-artifact: https://rubygems.org/gems/cff
+repository-code: https://github.com/citation-file-format/ruby-cff
+references:
+  - type: article
+    title: "ASTIR: Spatio-Temporal Data Mining for Crowd Flow Prediction"
+    authors:
+      - family-names: Lablack
+        given-names: Mourad
+        orcid: https://orcid.org/0000-0001-5997-7199
+      - family-names: Qi
+        given-names: Heng
+        orcid: https://orcid.org/0000-0002-8770-3934
+      - family-names: Shen
+        given-names: Yanming
+        orcid: https://orcid.org/0000-0003-4108-0230
+      - family-names: Yin
+        given-names: Baocai
+    identifiers:
+      - type: doi
+        value: 10.1109/ACCESS.2019.2950956
+    keywords:
+      - Traffic flow Prediction
+      - ConvLSTM
+      - Spatio-Temporal Neural Network
+    abstract: The citywide crowd flow prediction is crucial for a city to ensure productivity, safety and management of its citizen. However, the crowd flow may be affected by many factors, such as weather, working times, events, seasons, and so on. In this paper, we proposed Attentive Spatio-Temporal Inception ResNet (ASTIR), which aims to address the difficulty of crowd flow prediction. The ASTIR is based on the Inception-ResNet structure combined with Convolution-LSTM layers and attention module to better capture pattern movement changes. We build our deep neural network framework consisting of four distinct parts, by which we can capture the short-term, long-term and period properties, as well as external factors that can affect crowd flow behaviors. To show the performance of the proposed method, we use the widely applied benchmarks for crowd flow prediction (Taxi Beijing and Bike New York), and obtain notable improvements over the state-of-the-art approaches.
+    date-released: 2019
+    license: IEEE Access
