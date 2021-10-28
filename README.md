@@ -6,8 +6,8 @@ This is the repository for the papaer published in [IEEE Access journal](https:/
 
 ## Architecture
 
-![ASTIR Architecture](ASTIR_architecture.png)
+![ASTIR Architecture](Extra/ASTIR_architecture.png)
 
 ## Results
 
-![ASTIR Results](2019-12-10.png)
+![ASTIR Results](Extra/2019-12-10.png)
