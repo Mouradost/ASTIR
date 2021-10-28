@@ -15,7 +15,7 @@ This is the repository for the papaer published in [IEEE Access journal](https:/
 ## Citation
 
 ```bibtex
-@ARTICLE{Mourad_Shen_2021_Spatio,
+@ARTICLE{Mourad_Shen_2019_Spatio,
   author={Mourad, Lablack and Qi, Heng and Shen, Yanming and Yin, Baocai},
   journal={IEEE Access},
   title={ASTIR: Spatio-Temporal Data Mining for Crowd Flow Prediction},
