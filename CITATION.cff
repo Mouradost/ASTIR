@@ -12,12 +12,11 @@ keywords:
   - Traffic flow Prediction
   - ConvLSTM
   - Spatio-Temporal Neural Network
-version: 0.9.0
-doi: 10.5281/zenodo.1184077
-date-released: 2021-08-18
-license: Apache-2.0
-repository-artifact: https://rubygems.org/gems/cff
-repository-code: https://github.com/citation-file-format/ruby-cff
+version: 1.0.0
+doi: 10.1109/ACCESS.2019.2950956
+date-released: 2019
+license: MIT License
+repository-code: https://github.com/Mouradost/ASTIR
 references:
   - type: article
     title: "ASTIR: Spatio-Temporal Data Mining for Crowd Flow Prediction"
