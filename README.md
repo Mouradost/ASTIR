@@ -9,5 +9,4 @@ This is the repository for the papaer published in [IEEE Access journal](https:/
 ![ASTIR Architecture](Extra/ASTIR_architecture.png)
 
 ## Results
-
-![ASTIR Results](Extra/2019-12-10.png)
+<img src="Extra/2019-12-10.png" width=400 align=center>
