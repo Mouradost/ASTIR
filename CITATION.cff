@@ -1,9 +1,1 @@
-@article{mourad2019astir,
-  title={ASTIR: Spatio-temporal data mining for crowd flow prediction},
-  author={Mourad, Lablack and Qi, Heng and Shen, Yanming and Yin, Baocai},
-  journal={IEEE Access},
-  volume={7},
-  pages={175159--175165},
-  year={2019},
-  publisher={IEEE}
-}
+@ARTICLE{8889654,  author={Mourad, Lablack and Qi, Heng and Shen, Yanming and Yin, Baocai},  journal={IEEE Access},   title={ASTIR: Spatio-Temporal Data Mining for Crowd Flow Prediction},   year={2019},  volume={7},  number={},  pages={175159-175165},  doi={10.1109/ACCESS.2019.2950956}}
